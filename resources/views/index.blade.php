@@ -23,10 +23,54 @@
             <input type="text" name="name" class="form-control" id="name" value="">
         </div>
         <button type="submit" class="btn btn-primary form-control">Submit</button>
-    </form>
-</div>
+        </form>
+    </div>
+
+    <div class="container mt-4 text-center">
+        <div class="row mb-4">
+            <div class="col">
+                <h2>List All Students</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped table-hover table-sm table-bordered">
+                    <thead>
+                        <th>No</th>
+                        <th>Name</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 <script>
+
+    $(document).ready(function() {
+        $.ajax({
+            url: 'all-students',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $.each(data.data, function (i, student){
+                    $('tbody').append(
+                        "<tr>"+
+                            "<td>"+ (i+1) +"</td>"+
+                            "<td>"+student.name+"</td>"+
+                        "</tr>"
+
+                    )
+                })
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('Error in Database');
+            }
+        });
+    });
+
     $("form").submit(function (event) {
         let form_action = $("form").attr("action");
         let formData = {

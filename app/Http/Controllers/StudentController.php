@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    public function index(){
+        $students = Student::all();
+        return Response()->json([
+            "status"=>"success",
+            "message" => "SUCCESS GET ALL STUDENTS",
+            "data" => $students
+        ]);
+    }
+
     public function create()
     {
         return view('index');

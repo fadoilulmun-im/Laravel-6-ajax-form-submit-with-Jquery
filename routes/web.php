@@ -16,3 +16,4 @@
 // });
 Route::get('/', 'StudentController@create');
 Route::post('/student', 'StudentController@store')->name('student.save');
+Route::get('/all-students', 'StudentController@index');
